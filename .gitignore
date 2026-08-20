@@ -1,0 +1,25 @@
+# Environment variables
+.env
+.env.*
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Local database
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploaded files
+data/uploads/
+
+# ChromaDB
+chroma_db/
+chroma/
+
+# IDE
+.vscode/
+.idea/
