@@ -1,4 +1,6 @@
 # Environment variables
+chroma_data/
+chroma_data_baseline/
 .env
 .env.*
 
