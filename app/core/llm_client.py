@@ -1,6 +1,6 @@
 from google import genai
 
-from app.core.config import GEMINI_API_KEY
+from app.core.config import GEMINI_API_KEY, GEMINI_MODEL
 
 
 client = genai.Client(
@@ -11,7 +11,8 @@ client = genai.Client(
 def generate_answer(prompt: str) -> str:
 
     response = client.models.generate_content(
-        model="gemini-3.7-flash",
+        # model="gemini-3.7-flash",
+        model = GEMINI_MODEL,
         contents=prompt
     )
 

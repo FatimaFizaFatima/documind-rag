@@ -60,7 +60,7 @@ def build_sources(retrieved_chunks):
 
     return sources
 
-def answer_question(question: str, top_k: int = 3, distance_threshold: float = 1.1):
+def answer_question(question: str, top_k: int = 3, distance_threshold: float = 1.3):
     retrieved_chunks = retrieve_relevant_chunks(question, top_k)
 
     best_distance = retrieved_chunks["distances"][0][0]
@@ -76,36 +76,25 @@ def answer_question(question: str, top_k: int = 3, distance_threshold: float = 1
 
     return {"answer": answer, "sources": sources}
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
 
-#     question = "What does the article examine about Studio Ghibli?"
+    questions = [
+        "How does the animation style of My Neighbors The Yamadas differ from earlier Ghibli films?",
+        "How does My Neighbors The Yamadas compare to what Pixar was doing around the same time?",
+        "Which Ghibli film features a young girl who notices soot sprites disappearing and reappearing?"
+    ]
 
-#     result = answer_question(question)
+    for question in questions:
 
-#     print("\nANSWER:")
-#     print(result["answer"])
+        results = retrieve_relevant_chunks(question)
 
-#     print("\nSOURCES:")
+        print(f"\n--- Question: {question} ---")
 
-#     for source in result["sources"]:
-#         print(source)
+        documents = results["documents"][0]
+        distances = results["distances"][0]
 
-#     print("\nRETRIEVED CHUNKS:")
+        for i, (document, distance) in enumerate(zip(documents, distances)):
 
-#     retrieved_chunks = retrieve_relevant_chunks(
-#         question,
-#         top_k=3
-#     )
-
-#     documents = retrieved_chunks["documents"][0]
-#     metadatas = retrieved_chunks["metadatas"][0]
-#     distances = retrieved_chunks["distances"][0]
-
-#     for i, (document, metadata, distance) in enumerate(
-#         zip(documents, metadatas, distances)
-#     ):
-
-#         print(f"\n--- Chunk {i + 1} ---")
-#         print(f"Page: {metadata.get('page')}")
-#         print(f"Distance: {distance}")
-#         print(f"Content: {document[:500]}")
+            print(f"\n--- Chunk {i + 1} ---")
+            print(f"Distance: {distance}")
+            print(f"Content: {document[:500]}")

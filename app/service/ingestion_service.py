@@ -23,8 +23,8 @@ def run_ingestion(file_path: str):
 
     chunks = chunk_documents(
         documents,
-        chunk_size=500,
-        chunk_overlap=50
+        chunk_size=800,
+        chunk_overlap=100
     )
 
     print(f"Created {len(chunks)} chunks")
